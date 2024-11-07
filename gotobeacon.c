@@ -153,8 +153,8 @@ task main(){
 
 	while(true){
 		if (SensorValue[button] == 1){
-			start != start;
-			while(SensorValue[button]);	// Pauses the program until button is released
+			start = !start;
+			while(SensorValue[button] == 1);	// Pauses the program until button is released
 		}
 	
 
