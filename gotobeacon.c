@@ -1,4 +1,5 @@
 #pragma config(Sensor, in1,    analog1,        sensorAnalog)
+#pragma config(Sensor, dgtl1,    button,        sensorTouch)
 #pragma config(Sensor, dgtl10, digital10,      sensorDigitalOut)
 #pragma config(Sensor, dgtl11, digital11,      sensorDigitalOut)
 #pragma config(Sensor, dgtl12, digital12,      sensorDigitalOut)
@@ -143,17 +144,23 @@ task main(){
 	spin_speed = 50;//spin speed (for searching mode),used in move
 	SensorValue[digital10] = freq;// turn to 1KHz(red beacon)
 
+	bool start = false;
+
 	int state = 1;
 	int servoDown = 90;
 
 	setServo(port5, servoDown);
 
-
-	/*
-
-	*/
-
 	while(true){
+		if (SensorValue[button] == 1){
+			start != start;
+			while(SensorValue[button]);	// Pauses the program until button is released
+		}
+	
+
+	if(start){
+	while(start){
+
 
 
 		if (state == 1) //finds red beacon and goes to it
@@ -226,6 +233,7 @@ task main(){
 		}
 	}
 
+	}
 
-
+}
 }
