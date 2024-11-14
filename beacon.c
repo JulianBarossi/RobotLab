@@ -150,15 +150,15 @@ task main(){
 	bool start = false;
 
 	int state = 1;
-	int armDown = 90;
-	int armUp = 0;
+	int armDown = -120;
+	int armUp = 120;
 
 	setServo(robotArm, servoDown);
 while (true) {
         // Toggle start with button press
-        if (SensorValue[button] == 1) {
+        if (SensorValue[button] == 0) {
             start = !start;
-            while(SensorValue[button] == 1); // Debounce to avoid double toggle
+            //while(SensorValue[button] == 1); // Debounce to avoid double toggle
         }
         
         // Main operation loop if start is true
@@ -204,10 +204,10 @@ while (true) {
                     wait1Msec(2000);
                     motor[leftMotor] = 0;
                     motor[rightMotor] = 0;
-					state++;
+					//state++;
 
 				}
-
+/*
                 // State 3: Locate and approach green beacon
                 if (state == 3) {
                     
@@ -266,6 +266,7 @@ while (true) {
                 if (state == 6) {
                     break;
                 }
+				*/
             }
         }
     }
