@@ -150,7 +150,8 @@ task main(){
 	bool start = false;
 
 	int state = 1;
-	int servoDown = 90;
+	int armDown = 90;
+	int armUp = 0;
 
 	setServo(robotArm, servoDown);
 while (true) {
@@ -173,9 +174,9 @@ while (true) {
 
                 // State 2: Turn off red beacon using arm
                 if (state == 2) {
-                    setServo(robotArm, 100); // Lower arm to press red beacon
+                    setServo(robotArm, armDown); // Lower arm to press red beacon
                     wait1Msec(5000);
-                    setServo(robotArm, 0); // Retract arm
+                    setServo(robotArm, armUp); // Retract arm
                     wait1Msec(5000);
 
                     // Check proximity to red beacon
@@ -214,7 +215,7 @@ while (true) {
                         // Check for signal to verify contact with beacon
                         if (SensorValue[analog1] > thresholdValue) { 
                             // Hold arm down to grab beacon securely
-                            setServo(robotArm, servoDown);
+                            setServo(robotArm, armDown);
                             state++;
                         }
                     }
