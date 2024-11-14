@@ -153,7 +153,7 @@ task main(){
 	int armDown = -120;
 	int armUp = 120;
 
-	setServo(robotArm, servoDown);
+	setServo(robotArm, armUp);
 while (true) {
         // Toggle start with button press
         if (SensorValue[button] == 0) {
@@ -188,14 +188,14 @@ while (true) {
 
 					while(PD_sum > slow_level){
                     wait1Msec(5000);
-					setServo(robotArm, 100); // Lower arm to press red beacon
+					setServo(robotArm, armDown); // Lower arm to press red beacon
                     wait1Msec(5000);
                     setServo(robotArm, armUp); // Retract arm
                     wait1Msec(5000);
 
 					if(PD_sum > slow_level){
 						ReadPD();
-						Find_max()
+						Find_max();
 						Move();
 						}
 					}
@@ -207,6 +207,7 @@ while (true) {
 					//state++;
 
 				}
+				break;
 /*
                 // State 3: Locate and approach green beacon
                 if (state == 3) {
