@@ -1,7 +1,7 @@
 #pragma config(Sensor, in1, analog1, sensorAnalog)
 #pragma config(Sensor, dgtl1,  button,         sensorDigitalIn) //change to touch
 #pragma config(Sensor, dgtl2,  limitSwitch,    sensorDigitalIn) //change to limit/touch
-#pragma config(Sensor, dgtl3,  ultrasonicInput, sensorSONAR_cm)
+//#pragma config(Sensor, dgtl3,  ultrasonicInput, sensorSONAR_cm)
 #pragma config(Sensor, dgtl10, digital10, sensorDigitalOut)
 #pragma config(Sensor, dgtl11, digital11, sensorDigitalOut)
 #pragma config(Sensor, dgtl12, digital12, sensorDigitalOut)
@@ -140,25 +140,36 @@ task main(){
 	slow_level = 5000;// used in move
 	stop_level = 6000;//used in move
 	expose_time = 5; // expose time was changed from 3ms to 5ms (3ms in easyC -> 5ms in RobotC)
-	steer_sensitivity = 20;//used in move
+	steer_sensitivity = 5;//used in move
 	forward_speed = 35;//forward speed , used in move
 	slow_speed = 25;//slow speed , used in move
-	spin_speed = 15;//spin speed (for searching mode),used in move
+	spin_speed = 1;//spin speed (for searching mode),used in move
 	SensorValue[digital10] = freq;// turn to 1KHz(red beacon)
 
+    //Commented out ultrasonic initialization
 
-    bool start = false;
+    //bool start = false;
+    bool start = true;
 
-	int state = 1;
-	int armDown = -120;
-	int armUp = 120;
+	//int state = 1;
+	//int armDown = -120;
+	//int armUp = 120;
 
-    setServo(robotArm, armUp);
+    //setServo(robotArm, armUp);
 
 	while(true){
-		ReadPD();
-		Find_max();
-		Move();
+
+        if (start){
+            while (start) {
+                if (state == 1) {
+                    ReadPD();
+		            Find_max();
+		            Move();
+                }
+            }
+        }
+
+		
 	}
 
 
