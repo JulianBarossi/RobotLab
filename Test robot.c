@@ -261,6 +261,7 @@ task main(){
 								// Hold arm down to grab beacon securely
 								setServo(robotArm, armDown);
 								state++;
+								*/
 
 								}
 								}
@@ -268,23 +269,30 @@ task main(){
 
 								// State 5: Navigate out of the arena using ultrasonic sensor
 								if (state == 5) {
-								int distance = SensorValue[ultrasonicInput];
 
-								while (distance < maxDistance) {  // maxDistance is set based on arena layout
-								distance = SensorValue[ultrasonicInput];
-								if (distance >= maxDistance) {
-								// Move towards the furthest detected distance
-								motor[leftMotor] = forward_speed;
-								motor[rightMotor] = forward_speed;
-								} else {
-								motor[leftMotor] = 0;
-								motor[rightMotor] = 0;
-								}
-								}
+								int threshold = 30; // Distance before it starts turning
+								int reverseSpeed = -50; //values which can be changed or hardcoded
+								int turning speed = 30;
 
-								// Stop the robot after reaching a clear area
-								motor[leftMotor] = 0;
-								motor[rightMotor] = 0;
+
+								while(true){
+									int distance = SensorValue[ultrasonicInput];
+
+									if(distance < threshold){	//Obstacle detected turn right
+										motor[leftMotor] = turnSpeed;
+										motor[rightMotor] = -turnSpeed;	//Might need to be adjusted depending  configuration
+										wait1Msec(500);
+									}else{
+										//Reverse out
+										motor[leftMotor] = reverseSpeed;
+										motor[rightMotor] = reverseSpeed;
+										wait1Msec(4000); // duration of the reverse
+										motor[leftMotor] = 0;
+										motor[rightMotor] = 0;
+										break;
+	
+									}
+								}
 								state++;
 								}
 
@@ -292,7 +300,7 @@ task main(){
 								if (state == 6) {
 								break;
 								}
-								*/
+								
 							}
 						}
 					}
