@@ -254,14 +254,19 @@ task main(){
 								// Lower arm to grab beacon
 								setServo(robotArm, armDown);
 								wait1Msec(2000); // Adjust as needed for secure grip
-								break;
-								/*
-								// Check for signal to verify contact with beacon
-								if (SensorValue[analog1] > thresholdValue) {
-								// Hold arm down to grab beacon securely
-								setServo(robotArm, armDown);
-								state++;
-								*/
+								
+								
+								// Check if beacon is turned off
+								if (SensorValue[analog1] < thresholdValue) {
+						
+									setServo(robotArm, armDown);
+									wait1Msec(1000);
+									state++;	//procced to move
+
+								}else{
+									//If beacon is not off try again
+									setServo(robotArm, armup);
+									wait1Msec;
 
 								}
 								}
